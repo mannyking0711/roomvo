@@ -23,7 +23,7 @@ const imageLink = useState('image')
 const type = useState('type', () => 'Floors')
 const viewMode = useState('viewMode', () => 'list')
 const selectedTile = useState('selectedTile', () => "");
-const {data: products} = (await useFetch('/api/products/all', {
+const {data: products} = (await useFetch('/api/flooors/all', {
   query: {
     vendor_id: store.floorMeta.vendorId,
     product_id: store.floorMeta.products[0].id
@@ -74,7 +74,7 @@ const onImageChanged = () => {
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-// Mounted
+// Lifecycle
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 onMounted(() => {
   onClickTile((products.value as any)[0].id)

@@ -23,7 +23,7 @@ const {data: rooms} = await useFetch('/api/rooms/', {
 
 // Get metadata
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const {data: metadata} = await useFetch('/api/products/', {
+const {data: metadata} = await useFetch('/api/floors/', {
   query: {
     visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
   }
