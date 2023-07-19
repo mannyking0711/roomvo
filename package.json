@@ -1,0 +1,25 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^18.16.19",
+    "nuxt": "^3.6.3",
+    "nuxt-quasar-ui": "^2.0.4"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
+    "@quasar/extras": "^1.16.5",
+    "animate.css": "^4.1.1",
+    "node-html-parser": "^6.1.5",
+    "pinia": "^2.1.4",
+    "quasar": "^2.12.3"
+  }
+}

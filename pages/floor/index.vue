@@ -1,0 +1,80 @@
+<script setup lang="ts">
+import BackButton from "~/components/BackButton.vue"
+import {useStore} from "~/stores/store"
+
+
+// Store
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const store = useStore()
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+// Get rooms
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const {data: rooms} = await useFetch('/api/rooms/', {
+  query: {
+    visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
+  }
+})
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+// Get metadata
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const {data: metadata} = await useFetch('/api/products/', {
+  query: {
+    visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
+  }
+})
+store.setFloorMeta(metadata.value)
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+</script>
+
+<template>
+  <div class="q-pa-xl">
+
+    <div class="flex">
+
+      <div>
+        <back-button />
+      </div>
+
+      <div style="flex: 1">
+
+        <div class="row q-pb-lg">
+          <div class="text-h4 text-bold text-grey-7">See products in your room</div>
+        </div>
+
+
+        <div class="row q-py-lg">
+          <div class="text-h5 text-bold text-grey-7">Your rooms</div>
+        </div>
+
+
+        <div class="row q-py-lg">
+          <div class="text-h5 text-bold text-grey-7">Don't have a picture? Try our demo rooms instead</div>
+        </div>
+
+        <div class="row">
+          <div v-for="room in rooms" class="col-3 q-px-md q-py-lg">
+            <q-btn class="img-btn" @click="$router.push(`/floor/${room.id}`)">
+              <img :src="'https://www.roomvo.com/' + room.uncroppedThumbnailUrl" alt="image"/>
+            </q-btn>
+            <div class="q-pl-md text-overline">{{ room.name }}</div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+</template>
+
+<style scoped>
+</style>
