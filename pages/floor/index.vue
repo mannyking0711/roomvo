@@ -15,7 +15,7 @@ const store = useStore()
 if (store.getRooms.length === 0) {
   const {data: rooms} = await useFetch('/api/rooms/', {
     query: {
-      visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
+      visitor_id: '9beb4c45e0ce46bbb5f7347e32fa02c8'
     }
   })
 
@@ -30,7 +30,7 @@ if (store.getRooms.length === 0) {
 if (!store.isFloorLoaded) {
   const {data: metadata} = await useFetch('/api/floors/', {
     query: {
-      visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
+      visitor_id: '9beb4c45e0ce46bbb5f7347e32fa02c8'
     }
   })
 

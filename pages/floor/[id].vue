@@ -55,7 +55,7 @@ const onClickTile = async (id: string) => {
         ["img_format", "jpg"],
         ["is_for_download", "0"],
         ["vendor", store.floorMeta.vendorId],
-        ["visitor", "45b1829f9a734c5e8cf5a4cbf59047e7"],
+        ["visitor", "9beb4c45e0ce46bbb5f7347e32fa02c8"],
         ["locale", "en-gb"],
         ["display_width", "1024"],
         ["display_height", "1024"],
