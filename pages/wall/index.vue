@@ -59,11 +59,13 @@ const onUploadImage = async () => {
   formData.append('product_types', '1')
   formData.append('attestation_hash', 'MjQwMDYxMTI5Ng==')
 
-  const res: Ref<any> = (await useFetch('https://www.roomvo.com/services/room/rooms/', {
+  const res: Ref<any> = (await useFetch('/api/rooms/upload', {
     method: 'POST',
     body: formData
   })).data
-  navigateTo("/wall/" + res.value.id)
+  const json = JSON.parse(res.value)
+  if (json.id)
+    navigateTo("/wall/" + json.id)
   //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 }

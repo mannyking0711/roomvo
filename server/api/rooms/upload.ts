@@ -1,16 +1,19 @@
 export default defineEventHandler(async (event) => {
     if (getMethod(event) == 'POST') {
-        const body = await readBody(event)
-        const contentType = getHeader(event, 'Content-Type')
-        console.log(body)
-        console.log(contentType)
-        const res = await fetch('https://www.roomvo.com/services/room/rooms/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': contentType!
-            },
-            body: body
-        }).then(res => res.text());
-        return res;
+        return await new Promise((resolve) => {
+            event.node.req.on('data', async (data) => {
+                console.log(data);
+
+                const contentType = getHeader(event, 'Content-Type')
+                const res = await fetch('https://www.roomvo.com/services/room/rooms/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': contentType!
+                    },
+                    body: data
+                }).then(res => res.text());
+                resolve(res);
+            })
+        })
     }
 });

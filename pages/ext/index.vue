@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BackButton from "~/components/BackButton.vue"
 import {useStore} from "~/stores/store"
+import {Ref} from "vue/dist/vue";
 
 
 // Store
@@ -61,11 +62,13 @@ const onUploadImage = async () => {
   formData.append('product_types', '1')
   formData.append('attestation_hash', 'MjQwMDYxMTI5Ng==')
 
-  const res: Ref<any> = (await useFetch('https://www.roomvo.com/services/room/rooms/', {
+  const res: Ref<any> = (await useFetch('/api/rooms/upload', {
     method: 'POST',
     body: formData
   })).data
-  navigateTo("/ext/" + res.value.id)
+  const json = JSON.parse(res.value)
+  if (json.id)
+    navigateTo("/ext/" + json.id)
   //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 }
