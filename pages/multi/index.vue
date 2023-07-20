@@ -27,14 +27,14 @@ if (store.getRooms.length === 0) {
 
 // Get metadata
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if (!store.isFloorLoaded) {
-  const {data: metadata} = await useFetch('/api/floors/', {
+if (!store.isMultiLoaded) {
+  const {data: metadata} = await useFetch('/api/multi/', {
     query: {
       visitor_id: '45b1829f9a734c5e8cf5a4cbf59047e7'
     }
   })
 
-  store.setFloorMeta(metadata.value)
+  store.setMultiMeta(metadata.value)
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 </script>
@@ -66,7 +66,7 @@ if (!store.isFloorLoaded) {
 
         <div class="row">
           <div v-for="room in store.getRooms" class="col-3 q-px-md q-py-lg">
-            <q-btn class="img-btn" @click="$router.push(`/floor/${room.id}`)">
+            <q-btn class="img-btn" @click="$router.push(`/multi/${room.id}`)">
               <img :src="'https://www.roomvo.com/' + room.uncroppedThumbnailUrl" alt="image"/>
             </q-btn>
             <div class="q-pl-md text-overline">{{ room.name }}</div>

@@ -17,26 +17,52 @@ definePageMeta({
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-// State
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const imageLink = useState('image')
-const type = useState('type', () => 'Floors')
-const viewMode = useState('viewMode', () => 'list')
-const selectedTile = useState('selectedTile', () => "");
-const {data: products} = (await useFetch('/api/floors/all', {
-  query: {
-    vendor_id: store.floorMeta.vendorId,
-    product_id: store.floorMeta.products[0].id
-  }
-}))
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
 // Static
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const options = [
   {key: 'Floors', value: 'Floors'},
+  {key: 'Walls', value: 'Walls'},
+  // {key: 'CounterTops', value: 'CounterTops'},
 ]
+const patterns = [
+  {key: 'Floors', value: ''},
+  {key: 'Walls', value: ''},
+  // {key: 'CounterTops', value: ''},
+];
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+// State
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const imageLink = useState('image')
+const type = useState('type', () => (options[1]))
+const viewMode = useState('viewMode', () => 'list')
+const selectedTile = useState('selectedTile', () => "");
+const {data: products} = (await useFetch('/api/walls/all', {
+  query: {
+    vendor_id: store.wallMeta.vendorId,
+    product_id: store.wallMeta.products[2].id,
+    type: type.value.value
+  }
+}))
+
+watch(
+    () => type.value,
+    async (type: any) => {
+
+      const {data} = await useFetch('/api/walls/all', {
+        query: {
+          vendor_id: store.wallMeta.vendorId,
+          product_id: store.wallMeta.products[0].id,
+          type: type.value
+        }
+      })
+
+
+      products.value = data.value
+
+    }
+)
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
@@ -46,15 +72,41 @@ const onClickTile = async (id: string) => {
   store.setLoading(true)
 
   selectedTile.value = id;
+  patterns.find(p => p.key === type.value.value)!.value = id
+
+  const urls: any[] = []
+
+  // Floor
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (patterns[0].value) {
+    for (let i = 1; i < 2; i ++) {
+      urls.push(["product_id", patterns[0].value])
+      urls.push(["product_orientation", "0"])
+      urls.push(["product_instance", i.toString()])
+    }
+  }
+  //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+  // Wall
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (patterns[1].value) {
+    for (let i = 2; i < 20; i ++) {
+      urls.push(["product_id", patterns[1].value])
+      urls.push(["product_orientation", "0"])
+      urls.push(["product_instance", i.toString()])
+    }
+  }
+  //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 
   imageLink.value = `https://www.roomvo.com/services/room/rooms/${route.params.id}/paint/?` +
       new URLSearchParams([
-        ["product_id", id],
-        ["product_orientation", "0"],
-        ["product_instance", "1"],
+        ...urls,
         ["img_format", "jpg"],
         ["is_for_download", "0"],
-        ["vendor", store.floorMeta.vendorId],
+        ["vendor", store.wallMeta.vendorId],
         ["visitor", "45b1829f9a734c5e8cf5a4cbf59047e7"],
         ["locale", "en-gb"],
         ["display_width", "1024"],
@@ -84,7 +136,7 @@ onMounted(() => {
   <q-layout container class="shadow-2" style="height: 100vh">
     <q-header bordered>
       <q-toolbar>
-        <back-button to="/floor"/>
+        <back-button to="/wall"/>
       </q-toolbar>
     </q-header>
 
@@ -135,14 +187,14 @@ onMounted(() => {
                          :sizeName="(p as any).sizeName"
                          :thumbnail="p.thumbnail"
                          :active="selectedTile === p.id"
-                         @click="onClickTile(p.id)" />
+                         @click="onClickTile(p.id)"/>
             </scroll-area>
 
           </div>
 
 
           <div class="col-9">
-            <img :src="imageLink" alt="preview" class="full-width full-height" @load="onImageChanged" />
+            <img :src="imageLink" alt="preview" class="full-width full-height" @load="onImageChanged"/>
           </div>
 
         </div>

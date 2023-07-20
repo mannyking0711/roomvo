@@ -10,7 +10,7 @@ const hoverItem = useState('hoverItem', () => 'Multi-surface');
 const items = [
   {
     name: 'Multi-surface',
-    link: 'floor',
+    link: 'multi',
     image: "/assets/img/logo-multi-surface.webp"
   },
   {
@@ -30,7 +30,7 @@ const items = [
   },
   {
     name: 'Wall tiles & wallpaper',
-    link: 'wall',
+    link: 'ext',
     image: "/assets/img/logo-wall-tiles-paper.webp"
   },
 ]
