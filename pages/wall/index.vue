@@ -73,12 +73,12 @@ const onUploadImage = async () => {
     let width = image.width;
     let height = image.height;
 
-    canvas.width = 612;
-    canvas.height = 365;
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext('2d')!;
     ctx.drawImage(image, 0, 0, width, height);
 
-    imageData.value = canvas.toDataURL('image/jpeg')
+    imageData.value = canvas.toDataURL('image/jpeg', 0.6)
     const arrayBuffer = base64ToJFIF(imageData.value.slice(23))
     const blob = new Blob([arrayBuffer], { type: 'image/jpeg' })
 
