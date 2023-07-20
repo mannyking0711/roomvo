@@ -3,6 +3,7 @@ export default defineEventHandler(async (event) => {
         const body = await readBody(event)
         const contentType = getHeader(event, 'Content-Type')
         console.log(body)
+        console.log(contentType)
         const res = await fetch('https://www.roomvo.com/services/room/rooms/', {
             method: 'POST',
             headers: {
