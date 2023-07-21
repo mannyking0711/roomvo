@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     modules: [
         'nuxt-quasar-ui',
         '@pinia/nuxt',
-        '@nuxt/image',
+        '@nuxt/image'
     ],
     image: {},
     quasar: {},

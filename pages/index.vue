@@ -40,6 +40,10 @@ const items = [
 <template>
   <div class="background text-center">
 
+    <Head>
+      <Title>Roomvo</Title>
+    </Head>
+
 
     <div class="text-h2 text-bold q-pa-md">Your products. Our platform.</div>
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import BackButton from "~/components/BackButton.vue"
 import {useStore} from "~/stores/store"
-import {Ref} from "vue/dist/vue";
 
 
 // Store
@@ -9,11 +8,6 @@ import {Ref} from "vue/dist/vue";
 const store = useStore()
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-/** State **/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fileInput = useState<any>('fileInput')
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 // Get rooms
@@ -43,40 +37,14 @@ if (!store.isMultiLoaded) {
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
-/** Upload image **/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const onUploadImage = async () => {
-  const file = fileInput.value.files[0]
-
-
-/** Upload **/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const formData = new FormData()
-  formData.append('enrolled_experiments', '{"New UI design for 3D product display":"Sees the new 3D product display UI","New product catalog":"Sees new product catalog","Compare mode for viz":"Sees compare mode in viz","Compare specs for viz":"Sees compare specs view","New wall prediction method":"Sees results of the standard wall prediction"}')
-  formData.append('visitor_id', '9beb4c45e0ce46bbb5f7347e32fa02c8')
-  formData.append('picture_file', file, file.name);
-  formData.append('product_types', '1')
-  formData.append('attestation_hash', 'MjQwMDYxMTI5Ng==')
-
-  const res: Ref<any> = (await useFetch('/api/rooms/upload', {
-    method: 'POST',
-    body: formData
-  })).data
-  const json = JSON.parse(res.value)
-  if (json.id) {
-    navigateTo("/wall/" + json.id)
-  } else {
-    window.alert('Not a valid image');
-  }
-  //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-}
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 </script>
 
 <template>
   <div class="q-pa-xl">
+
+    <Head>
+      <Title>Roomvo - Multi surface</Title>
+    </Head>
 
     <div class="flex">
 
@@ -96,9 +64,8 @@ const onUploadImage = async () => {
             <div class="text-h5 text-bold text-grey-7">Your rooms</div>
           </div>
           <div class="col-md-10">
-            <q-btn color="primary" size="lg" icon="camera" @click="fileInput.click()">Upload</q-btn>
+            <upload-button @change="navigateTo('/multi/' + $event)" />
           </div>
-          <input type="file" ref="fileInput" hidden @change="onUploadImage"/>
         </div>
 
 

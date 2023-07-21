@@ -82,6 +82,10 @@ onMounted(() => {
 
 <template>
   <q-layout container class="shadow-2" style="height: 100vh">
+    <Head>
+      <Title>Roomvo - Floor</Title>
+    </Head>
+
     <q-header bordered>
       <q-toolbar>
         <back-button to="/floor"/>

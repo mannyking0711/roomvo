@@ -92,6 +92,11 @@ export const useStore = defineStore('store', {
         },
         setLoading(loading: boolean) {
             this.loading = loading;
+        },
+        setLoadingCallback(callback: Function) {
+            this.loading = true;
+            callback.apply(null);
+            this.loading = false;
         }
     }
 })

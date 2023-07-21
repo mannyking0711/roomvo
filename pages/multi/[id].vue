@@ -17,7 +17,6 @@ definePageMeta({
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-
 // Static
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const options = [
@@ -51,6 +50,9 @@ watch(
     () => type.value,
     async (type: any) => {
 
+      store.setLoading(true)
+
+
       const {data} = await useFetch('/api/multi/all', {
         query: {
           vendor_id: store.multiMeta.vendorId,
@@ -58,14 +60,14 @@ watch(
           type: type.value
         }
       })
-
-
       products.value = data.value
+
+
+      store.setLoading(false)
 
     }
 )
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
 
 
 // Event: click on tile
@@ -81,7 +83,7 @@ const onClickTile = async (id: string) => {
   // Floor
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (patterns[0].value) {
-    for (let i = 1; i < 2; i ++) {
+    for (let i = 1; i < 2; i++) {
       urls.push(["product_id", patterns[0].value])
       urls.push(["product_orientation", "0"])
       urls.push(["product_instance", i.toString()])
@@ -90,11 +92,10 @@ const onClickTile = async (id: string) => {
   //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-
   // Wall
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (patterns[1].value) {
-    for (let i = 2; i < 20; i ++) {
+    for (let i = 2; i < 20; i++) {
       urls.push(["product_id", patterns[1].value])
       urls.push(["product_orientation", "0"])
       urls.push(["product_instance", i.toString()])
@@ -136,6 +137,10 @@ onMounted(() => {
 
 <template>
   <q-layout container class="shadow-2" style="height: 100vh">
+    <Head>
+      <Title>Roomvo - Multi surface</Title>
+    </Head>
+
     <q-header bordered>
       <q-toolbar>
         <back-button to="/wall"/>
