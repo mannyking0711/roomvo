@@ -16,7 +16,6 @@ const fileInput = useState<any>('fileInput')
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-
 // Get rooms
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 if (store.getRooms.length === 0) {
@@ -29,7 +28,6 @@ if (store.getRooms.length === 0) {
   store.setRooms(rooms.value)
 }
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
 
 
 // Get metadata
@@ -46,15 +44,14 @@ if (!store.isMultiLoaded) {
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
-
 /** Upload image **/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const onUploadImage = async () => {
   const file = fileInput.value.files[0]
 
 
-  /** Upload **/
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/** Upload **/
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const formData = new FormData()
   formData.append('enrolled_experiments', '{"New UI design for 3D product display":"Sees the new 3D product display UI","New product catalog":"Sees new product catalog","Compare mode for viz":"Sees compare mode in viz","Compare specs for viz":"Sees compare specs view","New wall prediction method":"Sees results of the standard wall prediction"}')
   formData.append('visitor_id', '9beb4c45e0ce46bbb5f7347e32fa02c8')
@@ -81,7 +78,7 @@ const onUploadImage = async () => {
     <div class="flex">
 
       <div>
-        <back-button to="/" />
+        <back-button to="/"/>
       </div>
 
       <div style="flex: 1">
