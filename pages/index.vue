@@ -18,11 +18,11 @@ const items = [
     link: 'floor',
     image: "/assets/img/logo-flooring.webp"
   },
-  {
-    name: 'Rugs',
-    link: 'rug',
-    image: "/assets/img/logo-rugs.webp"
-  },
+  // {
+  //   name: 'Rugs',
+  //   link: 'rug',
+  //   image: "/assets/img/logo-rugs.webp"
+  // },
   {
     name: 'Wall paint',
     link: 'wall',
