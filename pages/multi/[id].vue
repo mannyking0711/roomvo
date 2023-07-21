@@ -147,7 +147,7 @@ onMounted(() => {
         <div class="row" style="flex: 1">
 
 
-          <div class="col-3 q-pr-lg" style="display: flex; flex-direction: column">
+          <div class="col-md-3 q-pr-lg-md" style="display: flex; flex-direction: column">
 
             <div class="flex justify-between ti-align-center q-pb-lg">
               <q-select
@@ -195,7 +195,7 @@ onMounted(() => {
           </div>
 
 
-          <div class="col-9">
+          <div class="col-md-9">
             <img :src="imageLink" alt="preview" class="full-width full-height" @load="onImageChanged"/>
           </div>
 

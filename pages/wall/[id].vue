@@ -142,10 +142,10 @@ onMounted(() => {
 
     <q-page-container>
       <q-page padding class="flex">
-        <div class="row" style="flex: 1">
+        <div class="row">
 
 
-          <div class="col-3 q-pr-lg" style="display: flex; flex-direction: column">
+          <div class="col-md-3 q-pr-lg-md full-width" style="display: flex; flex-direction: column">
 
             <div class="flex justify-between ti-align-center q-pb-lg">
               <q-select
@@ -193,7 +193,7 @@ onMounted(() => {
           </div>
 
 
-          <div class="col-9">
+          <div class="col-md-9">
             <img :src="imageLink" alt="preview" class="full-width full-height" @load="onImageChanged"/>
           </div>
 

@@ -49,7 +49,7 @@ const items = [
     <div class="row text-left">
 
 
-      <div class="col-3">
+      <div class="col-md-3">
 
         <div class="text-h6 text-bold text-grey-5">Try our demos</div>
         <hr />
@@ -66,7 +66,7 @@ const items = [
       </div>
 
 
-      <div class="col-9 q-pl-md relative-position">
+      <div class="col-md-9 q-pl-md relative-position">
 
         <img v-for="item of items"
              v-show="hoverItem === item.name"

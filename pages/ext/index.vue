@@ -92,10 +92,10 @@ const onUploadImage = async () => {
 
 
         <div class="row q-py-lg" style="align-items: center">
-          <div class="col-2">
+          <div class="col-md-2">
             <div class="text-h5 text-bold text-grey-7">Your rooms</div>
           </div>
-          <div class="col-10">
+          <div class="col-md-10">
             <q-btn color="primary" size="lg" icon="camera" @click="fileInput.click()">Upload</q-btn>
           </div>
           <input type="file" ref="fileInput" hidden @change="onUploadImage"/>
@@ -107,7 +107,7 @@ const onUploadImage = async () => {
         </div>
 
         <div class="row">
-          <div v-for="room in store.getRooms" class="col-3 q-px-md q-py-lg">
+          <div v-for="room in store.getRooms" class="col-md-3 q-px-md q-py-lg">
             <q-btn class="img-btn" @click="$router.push(`/ext/${room.id}`)">
               <img :src="'https://www.roomvo.com/' + room.uncroppedThumbnailUrl" alt="image"/>
             </q-btn>

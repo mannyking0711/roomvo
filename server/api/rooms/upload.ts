@@ -2,7 +2,6 @@ export default defineEventHandler(async (event) => {
     if (getMethod(event) == 'POST') {
         return await new Promise((resolve) => {
             event.node.req.on('data', async (data) => {
-                console.log(data);
 
                 const contentType = getHeader(event, 'Content-Type')
                 const res = await fetch('https://www.roomvo.com/services/room/rooms/', {
