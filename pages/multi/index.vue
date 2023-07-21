@@ -64,8 +64,11 @@ const onUploadImage = async () => {
     body: formData
   })).data
   const json = JSON.parse(res.value)
-  if (json.id)
-    navigateTo("/multi/" + json.id)
+  if (json.id) {
+    navigateTo("/wall/" + json.id)
+  } else {
+    window.alert('Not a valid image');
+  }
   //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 }
