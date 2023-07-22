@@ -21,6 +21,7 @@
     "@quasar/extras": "^1.16.5",
     "animate.css": "^4.1.1",
     "node-html-parser": "^6.1.5",
+    "nuxt-mongoose": "^0.0.9",
     "pinia": "^2.1.4",
     "quasar": "^2.12.3"
   }

@@ -72,8 +72,8 @@ if (!store.isExtLoaded) {
 
         <div class="row">
           <div v-for="room in store.getRooms" class="col-md-3 q-px-md q-py-lg">
-            <q-btn class="img-btn" @click="$router.push(`/ext/${room.id}`)">
-              <img :src="'https://www.roomvo.com/' + room.uncroppedThumbnailUrl" alt="image"/>
+            <q-btn class="img-btn" @click="$router.push(`/ext/${room.picture_id}`)">
+              <img :src="'https://www.roomvo.com/' + room.thumbnailUrl" alt="image"/>
             </q-btn>
             <div class="q-pl-md text-overline">{{ room.name }}</div>
           </div>
