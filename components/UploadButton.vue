@@ -79,7 +79,7 @@ const onUploadImage = async () => {
     formData.append('visitor_id', '9beb4c45e0ce46bbb5f7347e32fa02c8')
     formData.append('picture_file', blob, file.name);
     formData.append('product_types', '1')
-    formData.append('attestation_hash', 'MjQwMDYxMTI5Ng==')
+    formData.append('attestation_hash', 'NTkzMTU2ODMz')
 
     const res: Ref<any> = (await useFetch('/api/rooms/upload', {
       method: 'POST',

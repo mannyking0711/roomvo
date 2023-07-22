@@ -13,7 +13,8 @@
     "@nuxt/image": "^1.0.0-rc.1",
     "@types/node": "^18.16.19",
     "nuxt": "^3.6.3",
-    "nuxt-quasar-ui": "^2.0.4"
+    "nuxt-quasar-ui": "^2.0.4",
+    "sass": "^1.64.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
